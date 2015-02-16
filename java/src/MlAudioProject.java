@@ -48,20 +48,30 @@ public class MlAudioProject {
 	               try{
 	                   choice = Integer.parseInt(input);
 	                   switch(choice) {
-	                       case 1: System.out.println("New target: ");
-	                               target = reader.readLine();
-	                               break;
-	                       case 2: System.out.println("New clap dir: ");
-	                               clap = reader.readLine();
-	                               break;
-	                       case 3: System.out.println("New noclap dir: ");
-	                               noclap = reader.readLine();
-	                               break;
-	                       case 4: data.consolidateSamples(clap,noclap,target);
-	                               break;
-	                       case 5: train.gridSearch(data.getInstances(target));
-	                               break;
-	                       case 6: train.trainAndSerializeModel(data.getInstances(target), "libsvm.model");
+	                       case 1: 	System.out.println("New target: ");
+	                               	target = reader.readLine();
+	                               	break;
+	                       case 2: 	System.out.println("New clap dir: ");
+	                               	clap = reader.readLine();
+	                               	break;
+	                       case 3: 	System.out.println("New noclap dir: ");
+	                               	noclap = reader.readLine();
+	                               	break;
+	                       case 4: 	data.consolidateSamples(clap,noclap,target);
+	                               	break;
+	                       case 5: 	train.gridSearch(data.getInstances(target));
+	                               	break;
+	                       case 6: 	System.out.println("C-Value: ");
+	                       		    String c = reader.readLine();
+	                       		    System.out.println("Gamma Value: ");
+	                       		    String y = reader.readLine();
+	                       		    String[] options = new String[]{"-S","0","-K","2","-D","3","-G","0.0"
+	                       		    		,"-R","0.0","-N","0.5","-M","40","-C",c,"-E",y
+	                       		    		,"-P","0.1","-seed","1"};
+	                       		    train.trainAndSerializeModel(data.getInstances(target)
+	                       		    		,"libsvm.model"
+	                       		    		,options);
+	                       		    break;
 	                   }
 	               }
 	               catch(NumberFormatException e) {

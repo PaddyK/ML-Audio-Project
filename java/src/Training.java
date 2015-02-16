@@ -25,7 +25,8 @@ public class Training {
         eval	= null;
         folds 	= 10;
         rand    = new Random(42);
-        options = new String[]{"-S","0","-K","2","-D","3","-G","0.0","-R","0.0","-N","0.5","-M","40","-C","1","-E","0.001","-P","0.1","-seed","1"};
+        options = new String[]{"-S","0","-K","2","-D","3","-G","0.0","-R","0.0","-N","0.5","-M"
+        		,"40","-C","1","-E","0.001","-P","0.1","-seed","1"};
 
         System.out.println("Attribute\tC-Value\tGamma\tPrecision\tRecall\tF1-Score");
         
@@ -71,11 +72,12 @@ public class Training {
         } 
     }
     
-    public void trainAndSerializeModel(Instances data, String destination) {
-        LibSVM svm = new LibSVM();
+    public void trainAndSerializeModel(Instances data, String destination, String[] options) {
+        LibSVM svm = new LibSVM();        
         data.randomize(new Random(42));
 
         try {
+        	svm.setOptions(options);
 			svm.buildClassifier(data);
 		} catch (Exception e) {
 			System.err.println("Error while training svm model for serialization");
