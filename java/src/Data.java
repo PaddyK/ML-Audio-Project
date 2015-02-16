@@ -72,6 +72,24 @@ public class Data {
                     
 
                     if((data || firsttime) && !line.trim().isEmpty()) {
+                        if(firsttime && line.contains("@attribute clap"))
+                            line = "@attribute clap {clap,noclap}";
+                        if(data) {
+                            String[] tmp = line.split(",");
+
+                            if(instance.getPath().contains("noclap"))
+                                tmp[tmp.length-1] = "noclap";
+                            else
+                                tmp[tmp.length-1] = "clap";
+                            
+                            line = "";
+                            
+                            for(String s : tmp)
+                                line += s + ",";
+
+                            line = line.substring(0, line.length()-1);
+                        }
+
                         writer.write(line + nl);
                     }
                     if(!data && line.contains("@data")) { 
