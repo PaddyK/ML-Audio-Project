@@ -1,0 +1,8 @@
+data/
+*.class
+*.arff
+*.csv
+*.wav
+*~
+*.log
+*.model
