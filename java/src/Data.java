@@ -74,9 +74,13 @@ public class Data {
                     if((data || firsttime) && !line.trim().isEmpty()) {
                         if(firsttime && line.contains("@attribute clap"))
                             line = "@attribute clap {clap,noclap}";
+
+                        if(firsttime && line.contains("@attribute name"))
+                            line = "";
+                        
                         if(data) {
                             String[] tmp = line.split(",");
-
+                            tmp[0] = ""; // Delete name attribute
                             if(instance.getPath().contains("noclap"))
                                 tmp[tmp.length-1] = "noclap";
                             else
@@ -87,9 +91,8 @@ public class Data {
                             for(String s : tmp)
                                 line += s + ",";
 
-                            line = line.substring(0, line.length()-1);
+                            line = line.substring(1, line.length()-1);
                         }
-
                         writer.write(line + nl);
                     }
                     if(!data && line.contains("@data")) { 

@@ -1,3 +1,7 @@
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Random;
 
 import weka.core.Instances;
@@ -66,6 +70,31 @@ public class Training {
              }
         } 
     }
+    
+    public void trainAndSerializeModel(Instances data, String destination) {
+        LibSVM svm = new LibSVM();
+        data.randomize(new Random(42));
 
+        try {
+			svm.buildClassifier(data);
+		} catch (Exception e) {
+			System.err.println("Error while training svm model for serialization");
+			e.printStackTrace();
+			return;
+		}
+        ObjectOutputStream oos;
+		try {
+			oos = new ObjectOutputStream(new FileOutputStream(destination));		
+	        oos.writeObject(svm);
+	        oos.flush();
+	        oos.close();
+		} catch (FileNotFoundException e) {
+			System.err.println("Error while serializing model - file not found");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.err.println("Error while serializing model");
+			e.printStackTrace();
+		}
+    }
 }
 

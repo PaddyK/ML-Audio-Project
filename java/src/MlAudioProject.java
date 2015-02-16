@@ -34,6 +34,7 @@ public class MlAudioProject {
 	            System.out.println("5\tPerform GridSearch for LibSVM with radial kernel" + nl
 	                 + "\t Path to target (arff file containing all values) must be specified. " + nl
 	                 + "\t current: " + target);
+	            System.out.println("6\tTrain model with whole data and serialize it");
 	            System.out.println("q\tExit");
 	            
 	            System.out.println("Your choice: ");
@@ -60,6 +61,7 @@ public class MlAudioProject {
 	                               break;
 	                       case 5: train.gridSearch(data.getInstances(target));
 	                               break;
+	                       case 6: train.trainAndSerializeModel(data.getInstances(target), "libsvm.model");
 	                   }
 	               }
 	               catch(NumberFormatException e) {
