@@ -27,6 +27,13 @@
 
        <target name="execute">
            <java jar="MlAudioProject.jar" fork="true">
+           		<!-- Outcomment this and set path values accordingly
+           		<arg value="-target" />
+           		<arg value="/path/to/target" />
+           		<arg value="-noclap" />
+           		<arg value="/path/to/noclap" />
+           		<arg value="-clap" />
+           		<arg value="/path/to/clap" />-->
            </java>
        </target>
    </project>

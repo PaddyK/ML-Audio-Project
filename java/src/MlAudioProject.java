@@ -15,6 +15,16 @@ public class MlAudioProject {
         String target   = ".." + ps + "data" + ps + "arff" + ps + "clapping.arff";
         String clap     = ".." + ps + "data" + ps + "arff" + ps + "clap";
         String noclap   = ".." + ps + "data" + ps + "arff" + ps + "noclap";
+        
+        for(int i = 0; i < argv.length; i+=2) {
+        	if(argv[i].equalsIgnoreCase("-target"))
+        		target = argv[i + 1];
+        	else if(argv[i].equalsIgnoreCase("-clap"))
+        		clap = argv[i + 1];
+        	else if(argv[i].equalsIgnoreCase("-noclap"))
+        		noclap = argv[i + 1];
+        }
+        
         Training train  = new Training();
         Data data       = new Data(); 
         String input;
