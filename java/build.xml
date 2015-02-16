@@ -26,7 +26,7 @@
        </target>
 
        <target name="execute">
-           <java jar="MlAudioProject" fork="true">
+           <java jar="MlAudioProject.jar" fork="true">
            </java>
        </target>
    </project>

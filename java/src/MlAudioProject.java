@@ -7,9 +7,9 @@ public class MlAudioProject {
     public static void main(String[] argv) {
         String ps       = System.getProperty("file.separator");
         String nl       = System.getProperty("line.separator");
-        String target   = ".." + ps + "data" + ps + "arff" + "clapping.arff";
-        String clap     = ".." + ps + "data" + ps + "arff" +"clap";
-        String noclap   = ".." + ps + "data" + ps + "arff" +"noclap";
+        String target   = ".." + ps + "data" + ps + "arff" + ps + "clapping.arff";
+        String clap     = ".." + ps + "data" + ps + "arff" + ps + "clap";
+        String noclap   = ".." + ps + "data" + ps + "arff" + ps + "noclap";
         Training train  = new Training();
         Data data       = new Data(); 
         String input;
