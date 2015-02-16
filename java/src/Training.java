@@ -32,6 +32,7 @@ public class Training {
         int         folds;
         String[]    options;
         LibSVM      svm;
+        String		results;
         
         eval	= null;
         folds 	= 10;
@@ -39,8 +40,8 @@ public class Training {
         // Default options as from weka gui. Option -C and -E are the for c-value and gamma
         options = new String[]{"-S","0","-K","2","-D","3","-G","0.0","-R","0.0","-N","0.5","-M"
         		,"40","-C","1","-E","0.001","-P","0.1","-seed","1"};
-        // TODO write this to a file since due to the LibSVM output the printed information will be lost
-        System.out.println("Attribute\tC-Value\tGamma\tPrecision\tRecall\tF1-Score");
+        // Header for a summary of results
+        results = "Attribute\tC-Value\tGamma\tPrecision\tRecall\tF1-Score" + System.getProperty("line.separator");
         
         // Perform the grid search
         for(int c = -5; c < 16; c++) {
@@ -76,21 +77,24 @@ public class Training {
                 }
                 
                 // Print some statistics to compare different settings
-                System.out.println(randData.classAttribute().value(0) + "\t"
+                results += randData.classAttribute().value(0) + "\t"
                 		+ c + "\t"
                 		+ y + "\t" 
                 		+ eval.precision(0) + "\t" 
                 		+ eval.recall(0) + "\t" 
-                		+ ((eval.precision(0) * eval.recall(0)) / (eval.precision(0) + eval.recall(0))));
+                		+ ((eval.precision(0) * eval.recall(0)) / (eval.precision(0) + eval.recall(0)))
+                		+ System.getProperty("line.separator");
 
-                System.out.println(randData.classAttribute().value(1) + "\t" 
+                results += randData.classAttribute().value(1) + "\t" 
                 		+ c +"\t"
                 		+ y +"\t"
                 		+ eval.precision(1) + "\t" 
                 		+ eval.recall(1) + "\t" 
-                		+ ((eval.precision(1) * eval.recall(1)) / (eval.precision(1) + eval.recall(1))));
+                		+ ((eval.precision(1) * eval.recall(1)) / (eval.precision(1) + eval.recall(1)))
+                		+ System.getProperty("line.separator");
              }
-        } 
+        }
+        System.out.println(results);
     }
     
     /**
