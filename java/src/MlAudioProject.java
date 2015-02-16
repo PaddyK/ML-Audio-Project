@@ -2,6 +2,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * Provides a simple interface to interact with data and weka components
+ * @author Patrick
+ *
+ */
 public class MlAudioProject {
 
     public static void main(String[] argv) {
