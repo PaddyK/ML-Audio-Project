@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+    <project name="MLAudioProject" default="execute" basedir="." >
+        <property environment="env" />
+        <path id="externals">
+            <fileset dir="libraries">
+                <include name="weka.jar" />
+                <include name="libsvm.jar" />
+            </fileset>
+       </path>
+
+       <target name="compile">
+           <javac destdir="bin" source="1.7" target="1.7">
+               <src path="src" />
+               <classpath refid="externals" />
+           </javac>
+       </target>
+
+       <target name="package" depends="compile">
+           <jar destfile="MlAudioProject.jar">
+               <fileset dir="bin" />
+               <manifest>
+                    <attribute name="Main-Class" value="MlAudioProject"/>
+                    <attribute name="Class-Path" value="libraries/weka.jar libraries/libsvm.jar" />
+               </manifest>
+           </jar>
+       </target>
+
+       <target name="execute">
+           <java jar="MlAudioProject" fork="true">
+           </java>
+       </target>
+   </project>
