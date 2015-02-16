@@ -70,12 +70,12 @@ public class Data {
                 reader = new BufferedReader(new FileReader(instance));
                 while((line = reader.readLine()) != null) {
                     
+
+                    if((data || firsttime) && !line.trim().isEmpty()) {
+                        writer.write(line + nl);
+                    }
                     if(!data && line.contains("@data")) { 
                         data = true;
-                    }
-
-                    if(data || firsttime) {
-                        writer.write(line + nl);
                     }
                 }
                 firsttime = false;
