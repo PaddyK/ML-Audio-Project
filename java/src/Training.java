@@ -33,7 +33,10 @@ public class Training {
         String[]    options;
         LibSVM      svm;
         String		results;
+        String		inc;
+        Data		writer;
         
+        writer	= new Data();
         eval	= null;
         folds 	= 10;
         rand    = new Random(42);
@@ -77,7 +80,7 @@ public class Training {
                 }
                 
                 // Print some statistics to compare different settings
-                results += randData.classAttribute().value(0) + "\t"
+                inc = randData.classAttribute().value(0) + "\t"
                 		+ c + "\t"
                 		+ y + "\t" 
                 		+ eval.precision(0) + "\t" 
@@ -85,13 +88,15 @@ public class Training {
                 		+ ((eval.precision(0) * eval.recall(0)) / (eval.precision(0) + eval.recall(0)))
                 		+ System.getProperty("line.separator");
 
-                results += randData.classAttribute().value(1) + "\t" 
+                inc += randData.classAttribute().value(1) + "\t" 
                 		+ c +"\t"
                 		+ y +"\t"
                 		+ eval.precision(1) + "\t" 
                 		+ eval.recall(1) + "\t" 
                 		+ ((eval.precision(1) * eval.recall(1)) / (eval.precision(1) + eval.recall(1)))
                 		+ System.getProperty("line.separator");
+                writer.appendToFile(inc, "results.txt");
+                results += inc;
              }
         }
         System.out.println(results);

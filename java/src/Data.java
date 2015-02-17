@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.File;
@@ -184,5 +185,28 @@ public class Data {
             e.printStackTrace();
         }
         return ret;
+    }
+    
+    public void appendToFile(String append, String path) {
+    	File file = new File(path);
+    	FileWriter writer;
+    	
+    	try{
+	    	if(file.exists()) {
+	    		writer = new FileWriter(file, true);
+	    	}
+	    	else {
+	    		writer = new FileWriter(path);
+	    	}
+	    	
+	    	writer.write(append);
+	    	writer.close();
+    	}
+    	catch(FileNotFoundException e) {
+    		e.printStackTrace();
+    	}
+    	catch(IOException e) {
+    		e.printStackTrace();
+    	}
     }
 }

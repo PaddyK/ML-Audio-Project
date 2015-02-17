@@ -77,9 +77,9 @@ public class MlAudioProject {
 	                       case 5: 	train.gridSearch(data.getInstances(target));
 	                               	break;
 	                       case 6: 	System.out.println("C-Value: ");
-	                       		    String c = reader.readLine();
+	                       		    String c = "" + Math.pow(2, Double.parseDouble(reader.readLine()));
 	                       		    System.out.println("Gamma Value: ");
-	                       		    String y = reader.readLine();
+	                       		    String y = "" + Math.pow(2, Double.parseDouble(reader.readLine()));
 	                       		    String[] options = new String[]{"-S","0","-K","2","-D","3","-G","0.0"
 	                       		    		,"-R","0.0","-N","0.5","-M","40","-C",c,"-E",y
 	                       		    		,"-P","0.1","-seed","1"};
