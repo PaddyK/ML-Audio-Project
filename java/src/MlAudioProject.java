@@ -52,6 +52,7 @@ public class MlAudioProject {
 	            System.out.println("6\tTrain model with whole data and serialize it");
 	            System.out.println("7\tGrid-Search with multiple info gain");
                 System.out.println("8\tGrid-Search with linear kernel");
+                System.out.println("9\tGrid-Search with linear kernel and info gain");
                 System.out.println("q\tExit");
 	            
 	            System.out.println("Your choice: ");
@@ -92,6 +93,8 @@ public class MlAudioProject {
                             case 7: train.infoGainSearch(data.getInstances(target));
                                     break;
 	                        case 8: train.gridSearchLinear(data.getInstances(target), "results_linear.txt");
+                                    break;
+                            case 9: train.infoGainSearchLinear(data.getInstances(target));
                                     break;
                        }
 	               }

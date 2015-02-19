@@ -122,6 +122,7 @@ public class Training {
                 catch(Exception e) {
                 e.printStackTrace();
                 }
+                results += "=======================================================" + System.getProperty("line.separator") + System.getProperty("line.separator");
             }
         }
         System.out.println(results);
@@ -328,6 +329,43 @@ public class Training {
            String ival = "" + d;
             ival = ival.replace(".","_"); 
             gridSearch(topn, "results-gain-" + ival + ".txt");
+        }
+        
+    }            
+
+
+
+    public void infoGainSearchLinear(Instances data) {
+        //double[] gainValues = new double[]{0.04,0.051,0.052,0.054,0.06,0.09,0.1,0.17,0.18,0.3,0.7};
+        double[] gainValues = new double[]{0.3,0.7};
+        AttributeSelection      filter;
+        InfoGainAttributeEval   eval;
+        Ranker                  ranker;
+        Instances               topn = null;
+   
+        for(double d : gainValues) {
+            filter  = new AttributeSelection();
+            eval    = new InfoGainAttributeEval();
+            ranker  = new Ranker();
+
+            eval.setBinarizeNumericAttributes(false);
+            eval.setMissingMerge(false);
+
+            ranker.setGenerateRanking(true);
+            ranker.setThreshold(d);
+
+            filter.setEvaluator(eval);
+            filter.setSearch(ranker);
+
+            try {
+                filter.setInputFormat(data);
+                topn = Filter.useFilter(data, filter);
+            }
+            catch(OutOfMemoryError e) { e.printStackTrace(); }
+            catch(Exception e) { e.printStackTrace(); }
+           String ival = "" + d;
+            ival = ival.replace(".","_"); 
+            gridSearch(topn, "results-gain-linear" + ival + ".txt");
         }
         
     }            
