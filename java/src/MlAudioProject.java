@@ -50,7 +50,9 @@ public class MlAudioProject {
 	                 + "\t Path to target (arff file containing all values) must be specified. " + nl
 	                 + "\t current: " + target);
 	            System.out.println("6\tTrain model with whole data and serialize it");
-	            System.out.println("q\tExit");
+	            System.out.println("7\tGrid-Search with multiple info gain");
+                System.out.println("8\tGrid-Search with linear kernel");
+                System.out.println("q\tExit");
 	            
 	            System.out.println("Your choice: ");
 	            input = reader.readLine();
@@ -87,7 +89,11 @@ public class MlAudioProject {
 	                       		    		,"libsvm.model"
 	                       		    		,options);
 	                       		    break;
-	                   }
+                            case 7: train.infoGainSearch(data.getInstances(target));
+                                    break;
+	                        case 8: train.gridSearchLinear(data.getInstances(target), "results_linear.txt");
+                                    break;
+                       }
 	               }
 	               catch(NumberFormatException e) {
 	                   e.printStackTrace();

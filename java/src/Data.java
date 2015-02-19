@@ -188,10 +188,10 @@ public class Data {
     }
     
     public void appendToFile(String append, String path) {
-    	File file = new File(path);
-    	FileWriter writer;
     	
     	try{
+    	File file = new File(path);
+    	FileWriter writer;
 	    	if(file.exists()) {
 	    		writer = new FileWriter(file, true);
 	    	}
@@ -203,9 +203,11 @@ public class Data {
 	    	writer.close();
     	}
     	catch(FileNotFoundException e) {
-    		e.printStackTrace();
+    		System.err.println("Error on file " + path);
+            e.printStackTrace();
     	}
     	catch(IOException e) {
+    		System.err.println("Error on file " + path);
     		e.printStackTrace();
     	}
     }
